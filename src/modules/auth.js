@@ -3,10 +3,10 @@ import auth0 from "auth0-js";
 class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      domain: "impresionarte.auth0.com",
-      clientID: "dBjNdjFc92D5Og830Rc2e6UIUxYwHlKh",
+      domain: "mobilegrid.auth0.com",
+      clientID: "kzdoilvlTuyhM3J5NWwhYWb9oJBnT3ro",
       redirectUri: "http://localhost:3000/callback",
-      audience: "https://impresionarte.auth0.com/userinfo",
+      audience: "https://mobilegrid.auth0.com/userinfo",
       responseType: "token id_token",
       scope: "openid email"
     });
@@ -32,7 +32,6 @@ class Auth {
         if (!authResult || !authResult.idToken) {
           return reject(err);
         }
-        console.log(authResult);
         this.setSession(authResult);
         resolve();
       });

@@ -12,7 +12,17 @@ export default () => (
     {({ isAuthenticated }) => (
       <BrowserRouter>
         <Switch>
-          <PublicRoute exact path="/" component={Index} />
+          <Route
+            exact
+            path="/"
+            render={props =>
+              isAuthenticated ? (
+                <Redirect to="/dashboard" />
+              ) : (
+                <PublicRoute component={Index} path="/" title="Index" />
+              )
+            }
+          />
         </Switch>
       </BrowserRouter>
     )}

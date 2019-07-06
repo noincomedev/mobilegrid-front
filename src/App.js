@@ -15,7 +15,7 @@ import Router from "./ui/components/router";
 
 const client = new AWSAppSyncClient({
   url:
-    "https://e2bym6k4erc3blp5y3dh465i7q.appsync-api.us-east-1.amazonaws.com/graphql",
+    "https://d746ukrjcrekxopmw6p3ei6leu.appsync-api.us-east-1.amazonaws.com/graphql",
   region: "us-east-1",
   auth: {
     type: "OPENID_CONNECT",
