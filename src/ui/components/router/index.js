@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
+import PublicRoute from "./PublicRoute";
+
 import Index from "../../pages/IndexPage";
 
 import { UserConsumer } from "../../../App";
@@ -10,7 +12,7 @@ export default () => (
     {({ isAuthenticated }) => (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Index} />
+          <PublicRoute exact path="/" component={Index} />
         </Switch>
       </BrowserRouter>
     )}
