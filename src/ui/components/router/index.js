@@ -3,6 +3,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import PublicRoute from "./PublicRoute";
 
+import Callback from "../../pages/CallbackPage";
 import Index from "../../pages/IndexPage";
 
 import { UserConsumer } from "../../../App";
@@ -23,6 +24,7 @@ export default () => (
               )
             }
           />
+          <PublicRoute path="/callback" component={Callback} />
         </Switch>
       </BrowserRouter>
     )}
