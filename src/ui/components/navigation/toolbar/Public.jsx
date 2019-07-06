@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
       textDecoration: "none"
     }
   },
+  loginButton: {
+    color: theme.palette.common.white
+  },
   drawerMargin: {
     [theme.breakpoints.up("md")]: {
       marginLeft: 200
@@ -42,7 +45,7 @@ export default ({ onToggleDrawer, open, width }) => {
           </Typography>
           <Button
             variant="text"
-            color="primary"
+            classes={{ text: classes.loginButton }}
             onClick={event => handleLogin()}
           >
             Entrar

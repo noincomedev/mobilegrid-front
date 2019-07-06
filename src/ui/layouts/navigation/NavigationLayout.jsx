@@ -9,6 +9,8 @@ import WithWidth from "../../components/utils/WithWidth";
 
 import { UserConsumer } from "../../../App";
 
+import Drawer from "./drawer/DrawerLayout";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -24,11 +26,7 @@ export default ({ handleToggleDrawer, open }) => {
     <UserConsumer>
       {({ isAuthenticated }) => (
         <nav className={classes.root}>
-          <AppBar
-            color={isAuthenticated ? "primary" : "secondary"}
-            position="fixed"
-            className={classes.appBar}
-          >
+          <AppBar color="primary" position="fixed" className={classes.appBar}>
             {isAuthenticated ? (
               <WithWidth>
                 <PrivateToolbar
@@ -40,6 +38,7 @@ export default ({ handleToggleDrawer, open }) => {
               <PublicToolbar />
             )}
           </AppBar>
+          <Drawer open={open} onToggleDrawer={handleToggleDrawer} />
         </nav>
       )}
     </UserConsumer>
