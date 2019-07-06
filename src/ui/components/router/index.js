@@ -7,6 +7,7 @@ import PublicRoute from "./PublicRoute";
 import Callback from "../../pages/CallbackPage";
 import Dashboard from "../../pages/DashboardPage";
 import Index from "../../pages/IndexPage";
+import Map from "../../pages/MapPage";
 
 import { UserConsumer } from "../../../App";
 
@@ -20,7 +21,7 @@ export default () => (
             path="/"
             render={props =>
               isAuthenticated ? (
-                <Redirect to="/dashboard" />
+                <Redirect to="/map" />
               ) : (
                 <PublicRoute component={Index} path="/" title="Index" />
               )
@@ -33,6 +34,7 @@ export default () => (
             component={Dashboard}
             title="Dashboard"
           />
+          <PrivateRoute exact path="/map" component={Map} title="Map" />
         </Switch>
       </BrowserRouter>
     )}

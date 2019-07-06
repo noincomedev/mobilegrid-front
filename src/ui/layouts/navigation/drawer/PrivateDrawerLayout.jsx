@@ -10,6 +10,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Dashboard from "@material-ui/icons/Dashboard";
+import Map from "@material-ui/icons/Map";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import { useTheme } from "@material-ui/styles";
@@ -140,6 +141,27 @@ export default props => {
                     )
                   }}
                   primary="Dashboard"
+                />
+              </ListItem>
+              <ListItem button divider dense component={Link} to="/map">
+                <ListItemIcon
+                  classes={{
+                    root: classNames(
+                      classes.icon,
+                      isWidthUp("md", width) && classes.contrastIcon
+                    )
+                  }}
+                >
+                  <Map />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{
+                    root: classNames(
+                      classes.icon,
+                      isWidthUp("md", width) && classes.contrastItemText
+                    )
+                  }}
+                  primary="Map"
                 />
               </ListItem>
             </List>
