@@ -21,7 +21,8 @@ const styles = theme => ({
 class CustomMarker extends Component {
   state = {
     hover: false,
-    loading: false
+    loading: false,
+    confirmed: false
   };
 
   toggleHover = () => {
@@ -29,6 +30,8 @@ class CustomMarker extends Component {
   };
 
   toggleLoading = () => this.setState({ loading: !this.state.loading });
+
+  toggleConfirmed = () => this.setState({ confirmed: !this.state.confirmed });
 
   requestBattery = () => {
     const { venue_id } = this.props.venue;
@@ -49,16 +52,15 @@ class CustomMarker extends Component {
           venue_id: venue_id
         })
       }
-    )
-      .then(response => {
-        this.toggleLoading();
-      })
-      .then(() => this.toggleHover());
+    ).then(response => {
+      this.toggleLoading();
+      this.toggleConfirmed();
+    });
   };
 
   render() {
     const { venue, classes } = this.props;
-    const { hover, loading } = this.state;
+    const { hover, loading, confirmed } = this.state;
     return (
       <Fragment>
         <Marker
@@ -76,29 +78,35 @@ class CustomMarker extends Component {
         >
           <DialogTitle id="simple-dialog-title">{venue.venue_name}</DialogTitle>
           <DialogContent>
-            <Grid container justify="center" direction="column">
-              <Typography variant="subtitle1" color="inherit" paragraph>{`${
-                venue.venue_address
-              }`}</Typography>
-              <Typography
-                variant="subtitle2"
-                color="inherit"
-                paragraph
-              >{`Baterias Disponibles:${venue.banks}`}</Typography>
-              <Typography
-                variant="subtitle2"
-                color="inherit"
-                paragraph
-              >{`Slots Disponibles:${venue.slots}`}</Typography>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={event => this.requestBattery()}
-                disabled={loading}
-              >
-                {loading ? <Spinner /> : "Reservar"}
-              </Button>
-            </Grid>
+            {confirmed ? (
+              <Typography variant="subtitle1" color="inherit" paragraph>
+                Tu bateria ha sido reservada, puedes pasar a retirarla
+              </Typography>
+            ) : (
+              <Grid container justify="center" direction="column">
+                <Typography variant="subtitle1" color="inherit" paragraph>{`${
+                  venue.venue_address
+                }`}</Typography>
+                <Typography
+                  variant="subtitle2"
+                  color="inherit"
+                  paragraph
+                >{`Baterias Disponibles:${venue.banks}`}</Typography>
+                <Typography
+                  variant="subtitle2"
+                  color="inherit"
+                  paragraph
+                >{`Slots Disponibles:${venue.slots}`}</Typography>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={event => this.requestBattery()}
+                  disabled={loading}
+                >
+                  {loading ? <Spinner /> : "Reservar"}
+                </Button>
+              </Grid>
+            )}
           </DialogContent>
         </Dialog>
       </Fragment>
