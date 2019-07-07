@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flex: 1,
     backgroundColor: theme.palette.background.default,
-    padding: 24,
     marginTop: 64,
     [theme.breakpoints.down("xs")]: {
       marginTop: 56,
