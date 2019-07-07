@@ -9,6 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+import Spinner from "../../components/utils/Spinner";
+
 const styles = theme => ({
   marker: {
     color: "green",
@@ -18,16 +20,45 @@ const styles = theme => ({
 
 class CustomMarker extends Component {
   state = {
-    hover: false
+    hover: false,
+    loading: false
   };
 
   toggleHover = () => {
     this.setState({ hover: !this.state.hover });
   };
 
+  toggleLoading = () => this.setState({ loading: !this.state.loading });
+
+  requestBattery = () => {
+    const { venue_id } = this.props.venue;
+    this.toggleLoading();
+    fetch(
+      "https://61z05qvtmj.execute-api.us-east-1.amazonaws.com/prod/reservations",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${window.localStorage.getItem(
+            "AppSyncOIDCKey"
+          )}`
+        },
+        method: "POST",
+        body: JSON.stringify({
+          user_id: window.localStorage.getItem("AppSyncOIDCKey"),
+          venue_id: venue_id
+        })
+      }
+    )
+      .then(response => {
+        this.toggleLoading();
+      })
+      .then(() => this.toggleHover());
+  };
+
   render() {
     const { venue, classes } = this.props;
-    const { hover } = this.state;
+    const { hover, loading } = this.state;
     return (
       <Fragment>
         <Marker
@@ -58,9 +89,14 @@ class CustomMarker extends Component {
                 variant="subtitle2"
                 color="inherit"
                 paragraph
-              >{`Slots Disponibles:${venue.banks}`}</Typography>
-              <Button variant="outlined" color="secondary">
-                Reservar
+              >{`Slots Disponibles:${venue.slots}`}</Typography>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={event => this.requestBattery()}
+                disabled={loading}
+              >
+                {loading ? <Spinner /> : "Reservar"}
               </Button>
             </Grid>
           </DialogContent>

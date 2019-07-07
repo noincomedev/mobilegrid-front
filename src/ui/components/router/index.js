@@ -13,19 +13,19 @@ import { UserConsumer } from "../../../App";
 
 export default () => (
   <UserConsumer>
-    {({ isAuthenticated }) => (
+    {({ isAuthenticated, user }) => (
       <BrowserRouter>
         <Switch>
           <Route
             exact
             path="/"
-            render={props =>
-              isAuthenticated ? (
+            render={props => {
+              return isAuthenticated ? (
                 <Redirect to="/map" />
               ) : (
                 <PublicRoute component={Index} path="/" title="Index" />
-              )
-            }
+              );
+            }}
           />
           <PublicRoute path="/callback" component={Callback} />
           <PrivateRoute

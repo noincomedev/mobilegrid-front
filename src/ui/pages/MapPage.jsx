@@ -37,7 +37,6 @@ class MapPage extends Component {
     const { classes } = this.props;
     const { venues, loading } = this.state;
     if (loading) return <Spinner />;
-    console.log(venues);
     return (
       <Map
         style="mapbox://styles/mapbox/streets-v9"
