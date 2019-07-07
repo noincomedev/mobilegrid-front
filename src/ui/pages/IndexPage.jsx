@@ -1,10 +1,12 @@
 import React from "react";
 
 import { UserConsumer } from "../../App";
-import { Typography, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => ({
+  logo: { maxWidth: "45%", color: theme.palette.primary.dark }
+}));
 
 export default () => {
   const classes = useStyles();
@@ -12,9 +14,11 @@ export default () => {
     <UserConsumer>
       {user => (
         <Grid container justify="center" style={{ marginTop: 64 }}>
-          <Typography variant="h1" color="primary">
-            Index
-          </Typography>
+          <img
+            alt="logo"
+            className={classes.logo}
+            src="../Mobile Grid-logo.png"
+          />
         </Grid>
       )}
     </UserConsumer>
